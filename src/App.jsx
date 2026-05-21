@@ -1,122 +1,150 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import AddProduct from "./pages/AddProduct";
+import Navbar from "./components/Navbar";
+import "./App.css";
+import Footer from "./components/Footer";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      name: "Laptop",
+      price: 1200,
+      category: "Electronics",
+      image:
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
+    stock: 10,
+    },
+    {
+      id: 2,
+      name: "Phone",
+      price: 800,
+      category: "Electronics",
+      image:
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
+    stock: 10,
+    },
+    {
+    id: 3,
+    name: "Laptop",
+    price: 1200,
+    category: "Electronics",
+    image:
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
+    stock: 10,
+  },
+
+  {
+    id: 4,
+    name: "Smartphone",
+    price: 800,
+    category: "Electronics",
+    image:
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    stock: 15,
+  },
+
+  {
+    id: 5,
+    name: "Headphones",
+    price: 150,
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+    stock: 20,
+  },
+
+  {
+    id: 6,
+    name: "Gaming Mouse",
+    price: 60,
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1527814050087-3793815479db",
+    stock: 30,
+  },
+
+  {
+    id: 7,
+    name: "Keyboard",
+    price: 90,
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae",
+    stock: 12,
+  },
+
+  {
+    id: 8,
+    name: "Monitor",
+    price: 300,
+    category: "Electronics",
+    image:
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf",
+    stock: 8,
+  },
+  ]);
+
+  // Add product
+  function addProduct(product) {
+    setProducts([...products, product]);
+  }
+
+  // Update price
+  function updatePrice(id, newPrice) {
+    const updatedProducts = products.map(
+      (product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            price: newPrice,
+          };
+        }
+
+        return product;
+      }
+    );
+
+    setProducts(updatedProducts);
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <BrowserRouter>
+      <Navbar />
 
-      <div className="ticks"></div>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <Route
+          path="/products"
+          element={
+            <Products
+              products={products}
+              updatePrice={updatePrice}
+            />
+          }
+        />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <Route
+          path="/add-product"
+          element={
+            <AddProduct
+              addProduct={addProduct}
+            />
+          }
+        />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

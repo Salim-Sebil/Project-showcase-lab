@@ -1,0 +1,63 @@
+const products = [
+  {
+    id: 1,
+    name: "Laptop",
+    price: 1200,
+    category: "Electronics",
+    image:
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
+    stock: 10,
+  },
+
+  {
+    id: 2,
+    name: "Smartphone",
+    price: 800,
+    category: "Electronics",
+    image:
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    stock: 15,
+  },
+
+  {
+    id: 3,
+    name: "Headphones",
+    price: 150,
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+    stock: 20,
+  },
+
+  {
+    id: 4,
+    name: "Gaming Mouse",
+    price: 60,
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1527814050087-3793815479db",
+    stock: 30,
+  },
+
+  {
+    id: 5,
+    name: "Keyboard",
+    price: 90,
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae",
+    stock: 12,
+  },
+
+  {
+    id: 6,
+    name: "Monitor",
+    price: 300,
+    category: "Electronics",
+    image:
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf",
+    stock: 8,
+  },
+];
+
+export default products;
