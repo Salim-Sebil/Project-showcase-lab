@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 function ProductCard({
   product,
@@ -10,12 +10,12 @@ function ProductCard({
   return (
     <div className="product-card">
       <h3>{product.name}</h3>
-
+      <img src={product.image} alt={product.name} />
       <p>
         Category: {product.category}
       </p>
-
       <p>Price: ${product.price}</p>
+      <p>Stock: {product.stock}</p>
 
       <input
         type="number"
