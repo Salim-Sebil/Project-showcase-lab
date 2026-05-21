@@ -115,25 +115,80 @@ function App() {
   }, []);
   // Add product
   function addProduct(product) {
-    setProducts([...products, product]);
+    //setProducts([...products, product]);
+
+    fetch("http://localhost:3000/products", {
+      method: "POST",
+      headers: {
+        "Content-Type":
+          "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((response) =>
+        response.json()
+      )
+      .then((addedProduct) => {
+        setProducts([
+          ...products,
+          addedProduct,
+        ]);
+      });
   }
+
+  
 
   // Update price
   function updatePrice(id, newPrice) {
-    const updatedProducts = products.map(
-      (product) => {
-        if (product.id === id) {
-          return {
-            ...product,
-            price: newPrice,
-          };
-        }
+  //   const updatedProducts = products.map(
+  //     (product) => {
+  //       if (product.id === id) {
+  //         return {
+  //           ...product,
+  //           price: newPrice,
+  //         };
+  //       }
 
-        return product;
+  //       return product;
+  //     }
+  //   );
+
+  //   setProducts(updatedProducts);
+  // }
+  fetch(
+      `http://localhost:3000/products/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify(
+          newPrice
+        ),
       }
-    );
+    )
+      .then((response) =>
+        response.json()
+      )
+      .then((updatedProduct) => {
+        const updatedProducts =
+          products.map((product) => {
+            if (
+              product.id === updatedProduct.id
+            ) {
+              return updatedProduct;
+            }
 
-    setProducts(updatedProducts);
+            return product;
+          });
+
+        setProducts(updatedProducts);
+      });
+
+      useEffect(() => {
+        fetchProducts();
+      }, []);
   }
 
   return (
@@ -177,4 +232,62 @@ export default App;
 //                 setLoading(false);
 //             })
 //             .catch(error => console.error('Error fetching dog image:', error));
-//     }, []);
+// //     }, []);
+// function addProduct(newProduct) {
+//     fetch("http://localhost:3001/products", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type":
+//           "application/json",
+//       },
+//       body: JSON.stringify(newProduct),
+//     })
+//       .then((response) =>
+//         response.json()
+//       )
+//       .then((addedProduct) => {
+//         setProducts([
+//           ...products,
+//           addedProduct,
+//         ]);
+//       });
+//   }
+
+
+
+//   // UPDATE PRODUCT (EDIT)
+//   function updateProduct(
+//     id,
+//     updatedData
+//   ) {
+//     fetch(
+//       `http://localhost:3001/products/${id}`,
+//       {
+//         method: "PATCH",
+//         headers: {
+//           "Content-Type":
+//             "application/json",
+//         },
+//         body: JSON.stringify(
+//           updatedData
+//         ),
+//       }
+//     )
+//       .then((response) =>
+//         response.json()
+//       )
+//       .then((updatedProduct) => {
+//         const updatedProducts =
+//           products.map((product) => {
+//             if (
+//               product.id === updatedProduct.id
+//             ) {
+//               return updatedProduct;
+//             }
+
+//             return product;
+//           });
+
+//         setProducts(updatedProducts);
+//       });
+//   }
